@@ -14,6 +14,10 @@ target_include_directories(calculator
         $<INSTALL_INTERFACE:include>
 )
 
+# ---- App (the actual customer-facing executable) ----
+add_executable(calculator_app apps/main.cpp)
+target_link_libraries(calculator_app PRIVATE calculator)
+
 # ---- Tests ----
 if(BUILD_TESTING_DEMO)
     enable_testing()
@@ -25,7 +29,7 @@ if(BUILD_TESTING_DEMO)
 endif()
 
 # ---- Install / Artifact rules ----
-install(TARGETS calculator
+install(TARGETS calculator calculator_app
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
     RUNTIME DESTINATION bin
